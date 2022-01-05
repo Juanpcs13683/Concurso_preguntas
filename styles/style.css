@@ -1,0 +1,41 @@
+html{
+    background: grey;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#test{
+    background: honeydew;
+    width: 30rem;
+    padding: 4rem;
+    text-align: center;
+}
+
+h1{
+    color: blue;
+    font-size: 4rem;
+    text-align: center;
+    padding: 2px 0;
+}
+
+#pregunta{
+    font-size: 1.7rem;
+    color: chartreuse;
+}
+
+.button:hover{
+    cursor: pointer;
+    background-color: cyan;
+}
+
+#progreso{
+    font-size: 20px;
+}
