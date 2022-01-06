@@ -1,33 +1,36 @@
-/* importamos los datos  */
-import { preguntas } from "./datos/preguntas.js";
-import { Test } from "./compomentes/Test.js";
-import {Interfaz} from "./compomentes/Interfaz.js";
+// @ts-check
+import {preguntas} from "./datos/preguntas.js";
+import {Test} from "./compomentes/Test.js";
+import {Interfaz} from "./compomentes/Interfaz.js"
 
-/* creamos un metodo main para correr el test */
-function main(){
-    const test = new Test(preguntas);/* creamos un nuevo objeto Test y
-    le pasamos como parametro el arreglo preguntas */
+/**
+ * 
+ * @param {Test} test the main quiz object
+ * @param {Interfaz} interfaz ui object 
+ */
 
-    /* creamos un nuevo objeto de interfaz */
-    const interfaz = Interfaz();
+const renderPage = (test, interfaz) => {
+  if(test.terminado()){
+      console.log(test.puntaje);
+      interfaz.muestraPuntaje(test.puntaje);
+  }else{
+    interfaz.muestraPregunta(test.getIndicePregunta().pregunta);
+    interfaz.muestraOpciones(test.getIndicePregunta().opciones, (opcionActual) => {
+    test.seleccion(opcionActual)
+    renderPage(test, interfaz);
+    });
+    interfaz.muestraProgreso(test.indicePregunta+1, test.preguntas.length); /* cantidad de preguntas totales e indice actual */
+  }
+
 };
 
-/* creamos un metodo para mostrar los metodos de cada clase */
-const Pagina= (test, interfaz) => {
-    if(test.terminado()){
-        interfaz.muestraPuntaje(test.puntaje);
-    }else{
-        interfaz.muestraPregunta(test.getIndicePregunta().text); 
-        /* toma el testo de la pregunta actual dada por el metodo getIndicePregunta(), lo pasa com parametro al metodo
-        muestraPregunta como texto  */
-        interfaz.muestraOpciones(test.getIndicePregunta().opciones, (Opcionactual) =>{
-            test.seleccion(Opcionactual);
-            /* hacemos recurion del metodo Pagina */
-            Pagina(test, interfaz);
-        });
-        interfaz.muestraProgreso(test.IndicePregunta+1, test.preguntas.length);
-    }
-};
+/* import {data} from "./components/Question.js";  */
+function main() {
+    const test = new Test(preguntas);
+    const interfaz = new Interfaz();
 
-/* invocamos el metodo main  */
+    renderPage(test, interfaz);
+
+}
+
 main();

@@ -1,20 +1,36 @@
-/* creamos una clase con su constructor llamada Pregunta */
 export class Pregunta{
 
-    /* constructor para definir atributos de la clase */
+
+    /*Comentarios para pasar que tipo de informacion espera  */
+    /**
+     * 
+     * @param {String} pregunta este es el texto de la pregunta 
+     * @param {String[]} opciones  estas son las opciones de la pregunta
+     * @param {String} respuesta esta es la respuesta de la pregunta 
+     */ 
+    
+    
+    
+    /* constructor de atributos de clase */
     constructor(pregunta, opciones, respuesta){
         this.pregunta = pregunta;
         this.opciones = opciones;
         this.respuesta = respuesta;
     };
 
-    /* creamos un metodo para saber si la respuesta es correcta 
-    tiene como parametro opciones*/
-    respuestaCorrecta(opcion){
-        /* compara si la opcion elegida es igual a la respuesta y 
-        regresa true o false */
-        return opcion === this.respuesta;
-    };
+    /**
+     * 
+     * @param {String} opcion this return some text
+     * @returns {boolean} returns true if anwers is correct
+     */
 
-    
+    /* metodos de la clase */
+    respuestaCorrecta(opcion) {
+        return opcion === this.respuesta;
+    }
 }
+
+/* llamando a la clase */
+/* const question = new Question("cual es x cosa", ['aflka', 'kjasfkl', 'alkjdfa'], 'aflka');
+console.log(question);
+ */

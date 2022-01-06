@@ -1,51 +1,59 @@
 export class Interfaz{
-    
-    /* Creamos un constructor vacio para inicializar la clase */
-    contructor(){}
+    constructor(){}
 
-    /* creamos un metodo llamado muestra pregunta
-    para iterar entre las preguntas en el arreglo de datos */
+
+    /**
+     * 
+     * @param {String} pregunta question to render 
+     */
     muestraPregunta(pregunta){
-        /* al objeto creado en index.html le asignamos un texto 
-        el cual va a ser cada pregunta del arreglo de datos */
-        const Titulopregunta = document.getElementById('pregunta');
-        Titulopregunta.innerText = pregunta; 
-    };
+        const tituloPregunta = document.getElementById('pregunta');
+        tituloPregunta.innerText = pregunta;
 
-    /* metodo para que crea botones en el div opciones 
-    de index.html y muestra cada opcion en un boton */
+    }
+
+    /**
+     * 
+     * @param {String[]} opciones the choices of the question 
+    */
     muestraOpciones(opciones, callback){
         const contenedorOpciones = document.getElementById('opciones');
-        contenedorOpciones.innerText = '';
+        contenedorOpciones.innerHTML = '';
 
-        /* for que recorreo el arreglo de opciones
-        y crea un boton para cada opcion */
-        for(let i=0; i<opciones.length; i++){
+        for(let i=0;i<opciones.length;i++ ){
             const button = document.createElement('button');
             button.innerText = opciones[i];
             button.className = 'button';
-            button.addEventListener('click', () => 
-            callback(opciones[i]));
+            button.addEventListener('click', () => callback(opciones[i]));
 
             contenedorOpciones.append(button);
         }
+     
     }
 
-    /* metodo que muestra el puntaje */
+    /* funcion para el puntaje */
+
+    /**
+     * 
+     * @param {number} puntaje the total score 
+     */
     muestraPuntaje(puntaje){
-        const finTestHTML= `
+        const finalTestHTML = `
         <h1>Resultado</h1>
-        <h2>Tu Resultado: ${resultado}</h2>`;
-
+        <h2>Tu Puntaje: ${puntaje}</h2>
+        `
         const elemento = document.getElementById('test');
-        elemento.innerHTML = finTestHTML;
-        
+        elemento.innerHTML = finalTestHTML;
     }
 
-    /* metodo que muestra el progreso */
-
-    muestraPrograso(indiceActual, total){
-        const progreso = document.getElementById('progreso');
-        progreso.innerHTML = `Pregunta ${indiceActual} de ${total}`;
+    /* metodo showprogress */
+    /**
+     * 
+     * @param {number} indiceActual the current index of the quiz
+     * @param {number} total total questions number 
+     */
+    muestraProgreso(indiceActual, total){
+        const elemento = document.getElementById('progreso');
+        elemento.innerHTML = `Pregunta ${indiceActual} de ${total}`;
     }
-}
+} 
